@@ -12,10 +12,10 @@ export class RetrievalService {
   constructor(private http: HttpClient) { }
 
   authenticate(username: string, password: string) {
-    // return this.http.get(environment.backendURL + "/authenticate", { params: new HttpParams().set("username", username).set("password", password) });
-    return new Observable((observer) => {
-      observer.next({ "exists": true, "id": 1 });
-    });
+    return this.http.get(environment.backendURL + "/authenticate", { params: new HttpParams().set("username", username).set("password", password) });
+    // return new Observable((observer) => {
+    //   observer.next({ "exists": true, "id": 1 });
+    // });
   }
 
   getUserDetails(id: number) {
