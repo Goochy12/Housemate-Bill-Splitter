@@ -4,6 +4,10 @@ const app = express();
 var dotenv = require("dotenv"); //require dot env for environment variables
 dotenv.config(); // configure dot env
 
+var cors = require("cors"); //require cors for cross server calling
+app.use(cors()); //use cors
+app.options("*", cors()); //allow cors from any IP
+
 //method to open a connection to the database given paramaters
 function openDBConnection() {
     var connection = mysql.createConnection({
