@@ -2,6 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RetrievalService } from '../retrieval.service';
 
+import { User } from '../types/User';
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -9,20 +11,21 @@ import { RetrievalService } from '../retrieval.service';
 })
 export class DashboardComponent implements OnInit {
 
-  @Input() id: number = 1;
-
-  first_name: string;
-  surname: string;
-  display_name: string;
+  user: User;
 
   constructor(private route: ActivatedRoute, private retrievalService: RetrievalService, private router: Router) { }
 
   ngOnInit(): void {
-    this.retrievalService.getUserDetails(this.id).subscribe(res => {
+
+    this.user = this.retrievalService.getUser();
+
+    if (this.user == null) {
+      this.router.navigate([""]);
+    }
+
+    this.retrievalService.getUserDetails(this.user.id).subscribe(res => {
       if (res) {
-        this.first_name = res["first_name"];
-        this.surname = res["surname"];
-        this.display_name = res["display_name"];
+        console.log(res);
       }
     });
   }
