@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { RetrievalService } from '../retrieval.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,9 +9,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
+  @Input() id: number = 1;
+
+  first_name: string;
+  surname: string;
+  display_name: string;
+
+  constructor(private route: ActivatedRoute, private retrievalService: RetrievalService, private router: Router) { }
 
   ngOnInit(): void {
+    this.retrievalService.getUserDetails(this.id).subscribe(res => {
+      if (res) {
+        this.first_name = res["first_name"];
+        this.surname = res["surname"];
+        this.display_name = res["display_name"];
+      }
+    });
   }
 
 }

@@ -17,7 +17,7 @@ export class LoginPageComponent implements OnInit {
   username: string = null;
   password: string = null;
 
-  constructor(private route: ActivatedRoute, private retrievalService: RetrievalService, private router: Router,) { }
+  constructor(private route: ActivatedRoute, private retrievalService: RetrievalService, private router: Router) { }
 
   ngOnInit(): void {
   }

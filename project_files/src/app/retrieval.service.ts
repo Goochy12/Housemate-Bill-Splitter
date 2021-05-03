@@ -17,4 +17,10 @@ export class RetrievalService {
       observer.next({ "exists": true, "id": 1 });
     });
   }
+
+  getUserDetails(id: number) {
+    return new Observable((observer) => {
+      observer.next({ "first_name": "Liam", "surname": "Gooch", "display_name": "Liam Gooch" });
+    });
+  }
 }
