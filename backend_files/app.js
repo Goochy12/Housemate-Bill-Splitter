@@ -36,7 +36,7 @@ app.get('/authenticate', (req, res) => {
             res.send(null);
         }
         if (result[0]) {
-            res.send(true);  //if the result exists
+            res.send({ "exists": true, "id": result[0]["id"] });  //if the result exists
         } else {
             res.send(false); //else send false
         }
