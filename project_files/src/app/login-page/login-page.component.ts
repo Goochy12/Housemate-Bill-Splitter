@@ -26,6 +26,7 @@ export class LoginPageComponent implements OnInit {
     this.retrievalService.authenticate(this.username, this.password).subscribe(res => {
       if (res) {
         if (res["exists"]) {
+          this.retrievalService.createUser(res['id']);
           this.router.navigate(['dashboard']);
         }
       } else {
