@@ -1,5 +1,8 @@
 <h1>Login</h1>
-<p>Name:</p>
-<input username>
-<p>Password:</p>
-<input password type="password">
+<form>
+    <p>Name:</p>
+    <input [(ngModel)]="username">
+    <p>Password:</p>
+    <input [(ngModel)]="password" type="password">
+    <button (click)="buttonOnSelect()">Submit</button>
+</form>
