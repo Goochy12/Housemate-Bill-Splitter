@@ -44,5 +44,85 @@ app.get('/authenticate', (req, res) => {
     connection.end(); //close the connection
 });
 
-app.listen(process.env.PORT | 3000, () => {
-});
+app.get('/get_owing_summary', (req, res) => {
+    connection = openDBConnection();
+
+    var userID = req.query["userID"];
+
+    var sql = `SELECT * FROM owing_summary WHERE ID = \"${userID}\";`;
+
+    connection.query(sql, (err, result) => {
+        if (err) {
+            console.log(err);
+            res.send(null);
+        }
+        if (result[0]) {
+            res.send(result);  //if the result exists
+        } else {
+            res.send(false); //else send false
+        }
+    });
+
+    app.get('/get_owed_summary', (req, res) => {
+        connection = openDBConnection();
+
+        var userID = req.query["userID"];
+
+        var sql = `SELECT * FROM owed_summary WHERE ID = \"${userID}\";`;
+
+        connection.query(sql, (err, result) => {
+            if (err) {
+                console.log(err);
+                res.send(null);
+            }
+            if (result[0]) {
+                res.send(result);  //if the result exists
+            } else {
+                res.send(false); //else send false
+            }
+        });
+
+        app.get('/get_owing_detailed', (req, res) => {
+            connection = openDBConnection();
+
+            var userID = req.query["userID"];
+
+            var sql = `SELECT * FROM owing_detailed WHERE ID = \"${userID}\";`;
+
+            connection.query(sql, (err, result) => {
+                if (err) {
+                    console.log(err);
+                    res.send(null);
+                }
+                if (result[0]) {
+                    res.send(result);  //if the result exists
+                } else {
+                    res.send(false); //else send false
+                }
+            });
+            connection.end(); //close the connection
+        });
+
+        app.get('/get_owed_detailed', (req, res) => {
+            connection = openDBConnection();
+
+            var userID = req.query["userID"];
+
+            var sql = `SELECT * FROM owed_detailed WHERE ID = \"${userID}\";`;
+
+            connection.query(sql, (err, result) => {
+                if (err) {
+                    console.log(err);
+                    res.send(null);
+                }
+                if (result[0]) {
+                    res.send(result);  //if the result exists
+                } else {
+                    res.send(false); //else send false
+                }
+            });
+            connection.end(); //close the connection
+        });
+
+        app.listen(process.env.PORT | 3000, () => {
+        });
