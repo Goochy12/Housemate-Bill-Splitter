@@ -54,4 +54,8 @@ export class RetrievalService {
       observer.next({ "first_name": "Liam", "surname": "Gooch", "display_name": "Liam Gooch" });
     });
   }
+
+  getOwed(id: Number) {
+    return this.http.get(environment.backendURL + "/get_owed_detailed", { params: new HttpParams().set("userID", String(id)) });
+  }
 }
