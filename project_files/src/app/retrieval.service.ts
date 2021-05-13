@@ -24,7 +24,18 @@ export class RetrievalService {
   }
 
   setUserDetails(id?: Number, first_name?: String, surname?: String, display_name?: String) {
-
+    if (id) {
+      this.user.id = id;
+    }
+    if (first_name) {
+      this.user.first_name = first_name;
+    }
+    if (surname) {
+      this.user.surname = surname;
+    }
+    if (display_name) {
+      this.user.display_name = display_name;
+    }
   }
 
   getUser() {
