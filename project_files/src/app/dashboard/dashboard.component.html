@@ -1,23 +1,32 @@
-<h1>Welcome {{user.first_name}}!</h1>
-<h2>What do you owe?</h2>
-<p></p>
-<h2>Who owes you for what?</h2>
-<p></p>
-<br>
-<h2>Who owes you what?</h2>
-<table>
-    <tr>
-        <th>From</th>
-        <th>Item Name</th>
-        <th>Amount</th>
-    </tr>
-</table>
-<br>
-<h2>What do you owe?</h2>
-<table>
-    <tr>
-        <th>To</th>
-        <th>Item Name</th>
-        <th>Amount</th>
-    </tr>
-</table>
+<button (click)="logoff()">Logoff</button>
+<div *ngIf="user">
+
+    <h1>Welcome {{user.first_name}}!</h1>
+    <h2>What do you owe?</h2>
+    <p></p>
+    <h2>Who owes you for what?</h2>
+    <p></p>
+    <br>
+    <h2>Who owes you what?</h2>
+    <table>
+        <tr>
+            <th>From</th>
+            <th>Item Name</th>
+            <th>Amount</th>
+        </tr>
+        <tr *ngFor="let o of owed">
+            <td>{{o.From}}</td>
+            <td>{{o["Item Name"]}}</td>
+            <td>{{o.Amount}}</td>
+        </tr>
+    </table>
+    <br>
+    <h2>What do you owe?</h2>
+    <table>
+        <tr>
+            <th>To</th>
+            <th>Item Name</th>
+            <th>Amount</th>
+        </tr>
+    </table>
+</div>
