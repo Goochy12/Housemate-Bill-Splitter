@@ -65,11 +65,25 @@ export class RetrievalService {
     return this.http.get(environment.backendURL + "/get_owed_detailed", { params: new HttpParams().set("userID", String(id)) });
   }
 
-  pushNewItem(owingID: Number, owedID: Number, itemID: Number, amount: Number) {
+  getOwing(id: Number) {
+    return this.http.get(environment.backendURL + "/get_owing_detailed", { params: new HttpParams().set("userID", String(id)) });
+  }
 
+  submitNewRecord(userID: Number, owingID: Number, owedID: Number, itemID: Number, amount: Number) {
+    return this.http.get(environment.backendURL + "/submit_record", {
+      params: new HttpParams()
+        .set("userID", String(userID))
+        .set("owingID", String(owingID))
+        .set("owedID", String(owedID))
+        .set("itemID", String(itemID))
+        .set("amount", String(amount))
+    });
   }
 
   setRecordPaid(recordID: Number) {
-
+    return this.http.get(environment.backendURL + "/update_record_paid", {
+      params: new HttpParams()
+        .set("userID", String(recordID))
+    });
   }
 }
