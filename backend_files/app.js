@@ -196,7 +196,7 @@ app.get('/update_record_paid', (req, res) => {
 
     var recordID = req.query["recordID"];
 
-    var sql = `UPDATE record SET paid = 1 WHERE ID = \"${recordID}\";`;
+    var sql = `UPDATE record SET paid = 1, date_paid = current_timestamp() WHERE ID = \"${recordID}\";`;
 
     connection.query(sql, (err, result) => {
         if (err) {
