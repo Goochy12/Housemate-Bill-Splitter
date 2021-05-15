@@ -1,7 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { RetrievalService } from '../retrieval.service';
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { NewRecordDialogComponent } from '../new-record-dialog/new-record-dialog.component';
 
 import { User } from '../types/User';
 
@@ -13,11 +15,11 @@ import { User } from '../types/User';
 export class DashboardComponent implements OnInit {
 
   user: User;
-  items: [];
   owed: {};
   displayedColumnsOwed: string[] = ['from', 'item_name', 'amount'];
 
-  constructor(private route: ActivatedRoute, private retrievalService: RetrievalService, private router: Router, private cookieService: CookieService) { }
+  constructor(private route: ActivatedRoute, private retrievalService: RetrievalService,
+    private router: Router, private cookieService: CookieService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
 
@@ -35,6 +37,10 @@ export class DashboardComponent implements OnInit {
   logoff() {
     this.cookieService.delete('userCookie');
     this.router.navigate([""]);
+  }
+
+  openDialog() {
+    this.dialog.open(NewRecordDialogComponent, { data: null })
   }
 
 }

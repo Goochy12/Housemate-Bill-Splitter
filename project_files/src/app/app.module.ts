@@ -17,13 +17,15 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatInputModule } from '@angular/material/input';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatDialogModule } from '@angular/material/dialog';
+import { NewRecordDialogComponent } from './new-record-dialog/new-record-dialog.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginPageComponent,
-    DashboardComponent
+    DashboardComponent,
+    NewRecordDialogComponent
   ],
   imports: [
     BrowserModule,
