@@ -23,15 +23,16 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.user = this.retrievalService.getUser();
-
-    if (this.user) {
-      this.retrievalService.getOwed(this.user.id).subscribe(res => {
-        this.owed = res;
-      });
-    } else {
-      this.router.navigate([""]);
-    }
+    this.retrievalService.userObservable$.subscribe(u => {
+      if (u) {
+        this.user = u;
+        this.retrievalService.getOwed(this.user.id).subscribe(res => {
+          this.owed = res;
+        });
+      } else {
+        this.router.navigate([""]);
+      }
+    });
   }
 
   logoff() {

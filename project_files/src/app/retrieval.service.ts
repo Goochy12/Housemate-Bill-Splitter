@@ -4,7 +4,8 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { User } from './types/User';
 
 import { environment } from 'src/environments/environment';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -15,8 +16,12 @@ export class RetrievalService {
 
   private user: User;
 
+  private userSource = new BehaviorSubject<User>(undefined);  //create a user object that can be observed
+  userObservable$ = this.userSource.asObservable(); //create an observable for the user object
+
   createUser(id: Number) {
     this.user = new User(id);
+    this.userSource.next(this.user);
   }
 
   login() {
@@ -39,11 +44,13 @@ export class RetrievalService {
     if (group_id) {
       this.user.groupID = group_id;
     }
+    this.userSource.next(this.user);
   }
 
-  getUser() {
-    return this.user;
-  }
+  // getUser() {
+  //   return this.userObservable$;
+  //   // return this.user;
+  // }
 
   authenticate(username: string, password: string) {
     return this.http.get(environment.backendURL + "/authenticate", { params: new HttpParams().set("username", username).set("password", password) });
