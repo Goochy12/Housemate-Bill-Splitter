@@ -14,6 +14,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatInputModule } from '@angular/material/input';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { MatTabsModule } from '@angular/material/tabs';
     MatFormFieldModule,
     MatIconModule,
     MatTableModule,
-    MatTabsModule
+    MatTabsModule,
+    MatInputModule
   ],
   providers: [CookieService],
   bootstrap: [AppComponent]
