@@ -15,19 +15,32 @@ import { User } from '../types/User';
 export class DashboardComponent implements OnInit {
 
   user: User;
-  owed: {};
+  owedDetailed: {};
+  owingDetailed: {};
+  owedSummary: {};
+  owingSummary: {};
   displayedColumnsOwed: string[] = ['from', 'item_name', 'amount'];
+  displayedColumnsOwing: string[] = ['to', 'item_name', 'amount'];
 
   constructor(private route: ActivatedRoute, private retrievalService: RetrievalService,
-    private router: Router, private cookieService: CookieService, public dialog: MatDialog) { }
+    private router: Router, public dialog: MatDialog) { }
 
   ngOnInit(): void {
 
     this.retrievalService.userObservable$.subscribe(u => {
       if (u) {
         this.user = u;
-        this.retrievalService.getOwed(this.user.id).subscribe(res => {
-          this.owed = res;
+        this.retrievalService.getOwedDetailed(this.user.id).subscribe(res => {
+          this.owedDetailed = res;
+        });
+        this.retrievalService.getOwingDetailed(this.user.id).subscribe(res => {
+          this.owingDetailed = res;
+        });
+        this.retrievalService.getOwedSummary(this.user.id).subscribe(res => {
+          this.owedSummary = res[0]["Amount"];
+        });
+        this.retrievalService.getOwingSummary(this.user.id).subscribe(res => {
+          this.owingSummary = res[0]["Amount"];
         });
       } else {
         this.router.navigate([""]);
@@ -36,7 +49,7 @@ export class DashboardComponent implements OnInit {
   }
 
   logoff() {
-    this.cookieService.delete('userCookie');
+    localStorage.removeItem('userCookie');
     this.router.navigate([""]);
   }
 

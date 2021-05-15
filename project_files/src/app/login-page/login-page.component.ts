@@ -1,12 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-
 import { RetrievalService } from '../retrieval.service';
-
 import { ActivatedRoute, Router } from '@angular/router';
-
-import { Observable, throwError } from 'rxjs';
-import { catchError, retry } from 'rxjs/operators';
-import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-login-page',
@@ -20,10 +14,10 @@ export class LoginPageComponent implements OnInit {
 
   hidePassword: boolean = true;
 
-  constructor(private route: ActivatedRoute, private retrievalService: RetrievalService, private router: Router, private cookieService: CookieService) { }
+  constructor(private route: ActivatedRoute, private retrievalService: RetrievalService, private router: Router) { }
 
   ngOnInit(): void {
-    var userCookie = this.cookieService.get("userCookie");
+    var userCookie = localStorage.getItem("userCookie");
     if (userCookie) {
       this.retrievalService.createUser(Number(userCookie));
       this.getUserDetails(Number(userCookie));
@@ -37,7 +31,7 @@ export class LoginPageComponent implements OnInit {
         if (authRes["exists"]) {
           this.retrievalService.createUser(authRes['id']);
           this.getUserDetails(authRes['id']);
-          this.cookieService.set('userCookie', authRes['id']);
+          localStorage.setItem('userCookie', authRes['id']);
           this.router.navigate(['dashboard']);
         }
       } else {
