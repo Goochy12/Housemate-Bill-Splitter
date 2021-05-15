@@ -4,4 +4,7 @@ table {
 .mat-tab-group {
     margin-bottom: 48px;
   }
-  
+
+  .spacer {
+    flex: 1 1 auto;
+  }
