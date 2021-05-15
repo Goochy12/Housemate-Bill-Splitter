@@ -21,7 +21,7 @@ function openDBConnection() {
 }
 
 app.get('/', (req, res) => {
-    res.send('Hello World!')
+    // res.send('Hello World!')
 });
 
 app.get('/authenticate', (req, res) => {
@@ -45,12 +45,12 @@ app.get('/authenticate', (req, res) => {
     connection.end(); //close the connection
 });
 
-app.get('/get_owing_summary', (req, res) => {
+app.get('/get_user_details', (req, res) => {
     connection = openDBConnection();
 
     var userID = req.query["userID"];
 
-    var sql = `SELECT * FROM owing_summary WHERE ID = \"${userID}\";`;
+    var sql = `SELECT * FROM user WHERE ID = \"${userID}\";`;
 
     connection.query(sql, (err, result) => {
         if (err) {
@@ -65,12 +65,50 @@ app.get('/get_owing_summary', (req, res) => {
     });
 });
 
-app.get('/get_owed_summary', (req, res) => {
+app.get('/get_user_list', (req, res) => {
+    connection = openDBConnection();
+
+    var groupID = req.query["groupID"];
+
+    var sql = `SELECT * FROM user WHERE group_id = \"${groupID}\";`;
+
+    connection.query(sql, (err, result) => {
+        if (err) {
+            console.log(err);
+            res.send(null);
+        }
+        if (result[0]) {
+            res.send(result);  //if the result exists
+        } else {
+            res.send(false); //else send false
+        }
+    });
+});
+
+app.get('/get_item_list', (req, res) => {
+    connection = openDBConnection();
+
+    var sql = `SELECT * FROM item;`;
+
+    connection.query(sql, (err, result) => {
+        if (err) {
+            console.log(err);
+            res.send(null);
+        }
+        if (result[0]) {
+            res.send(result);  //if the result exists
+        } else {
+            res.send(false); //else send false
+        }
+    });
+});
+
+app.get('/get_summary', (req, res) => {
     connection = openDBConnection();
 
     var userID = req.query["userID"];
 
-    var sql = `SELECT * FROM owed_summary WHERE ID = \"${userID}\";`;
+    var sql = `SELECT * FROM summary WHERE ID = \"${userID}\";`;
 
     connection.query(sql, (err, result) => {
         if (err) {
@@ -132,19 +170,43 @@ app.get('/submit_record', (req, res) => {
 
     //owed_id, owing_id, item_id, value, date_submitted
     var userID = req.query["userID"];
-    var toID = req.query["toID"];
-    var fromID = req.query["fromID"];
+    var owedID = req.query["owedID"];
+    var owingID = req.query["owingID"];
     var itemID = req.query["itemID"];
-    var value = req.query["value"];
+    var amount = req.query["amount"];
 
     var sql = `INSERT INTO record (item_id, value, submitted_by_id, owed_id, owing_id, date_submitted)
-    values (` + mysql.escape(itemID) + `, ` + mysql.escape(value) + `, ` + mysql.escape(userID) + `, ` + mysql.escape(toID) + `,
-    ` + mysql.escape(fromID) + `, current_timestamp());`;
+    values (` + mysql.escape(itemID) + `, ` + mysql.escape(amount) + `, ` + mysql.escape(userID) + `, ` + mysql.escape(owedID) + `,
+    ` + mysql.escape(owingID) + `, current_timestamp());`;
 
     connection.query(sql, (err, result) => {
         if (err) {
             console.log(err);
             res.send(null);
+        }
+        if (result) {
+            res.send(result);
+        }
+    });
+    connection.end(); //close the connection
+});
+
+app.get('/update_record_paid', (req, res) => {
+    connection = openDBConnection();
+
+    var recordID = req.query["recordID"];
+
+    var sql = `UPDATE record SET paid = 1 WHERE ID = \"${recordID}\";`;
+
+    connection.query(sql, (err, result) => {
+        if (err) {
+            console.log(err);
+            res.send(null);
+        }
+        if (result) {
+            res.send(result);  //if the result exists
+        } else {
+            res.send(false); //else send false
         }
     });
     connection.end(); //close the connection
