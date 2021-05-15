@@ -13,6 +13,7 @@ import { User } from '../types/User';
 export class DashboardComponent implements OnInit {
 
   user: User;
+  items: [];
   owed: {};
   displayedColumnsOwed: string[] = ['from', 'item_name', 'amount'];
 
