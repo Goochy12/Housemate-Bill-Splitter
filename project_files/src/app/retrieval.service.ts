@@ -55,7 +55,23 @@ export class RetrievalService {
     });
   }
 
+  getItemList() {
+    return this.http.get(environment.backendURL + "/get_item_list");
+  }
+
+  getUserList(id: Number) {
+    return this.http.get(environment.backendURL + "/get_user_list", { params: new HttpParams().set("groupID", String(id)) });
+  }
+
   getOwed(id: Number) {
     return this.http.get(environment.backendURL + "/get_owed_detailed", { params: new HttpParams().set("userID", String(id)) });
+  }
+
+  pushNewItem(owingID: Number, owedID: Number, itemID: Number, amount: Number) {
+
+  }
+
+  setRecordPaid(recordID: Number) {
+
   }
 }
