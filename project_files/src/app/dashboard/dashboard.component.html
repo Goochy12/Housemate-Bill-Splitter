@@ -9,53 +9,54 @@
         </div>
 
         <div>
-            <h2>What do you owe?</h2>
+            <h2>What do you owe whom?</h2>
 
-            <h2>Who owes you for what?</h2>
+            <h2>Whom owes you what?</h2>
 
             <br>
         </div>
 
-        <mat-tab-group mat-align-tabs="center">
-            <mat-tab label="Who owes you what?">
-                <table mat-table [dataSource]="owed">
-                    <ng-container matColumnDef="from">
-                        <th mat-header-cell *matHeaderCellDef>From</th>
-                        <td mat-cell *matCellDef="let o">{{o.From}}</td>
-                    </ng-container>
-                    <ng-container matColumnDef="item_name">
-                        <th mat-header-cell *matHeaderCellDef>Item name</th>
-                        <td mat-cell *matCellDef="let o">{{o["Item Name"]}}</td>
-                    </ng-container>
-                    <ng-container matColumnDef="amount">
-                        <th mat-header-cell *matHeaderCellDef>Amount</th>
-                        <td mat-cell *matCellDef="let o">{{o.Amount}}</td>
-                    </ng-container>
-                    <!-- <tr>
-                    <th>From</th>
-                    <th>Item Name</th>
-                    <th>Amount</th>
-        </tr>
-        <tr *ngFor="let o of owed">
-            <td>{{o.From}}</td>
-            <td>{{o["Item Name"]}}</td>
-            <td>{{o.Amount}}</td>
-        </tr> -->
-                    <tr mat-header-row *matHeaderRowDef="displayedColumnsOwed"></tr>
-                    <tr mat-row *matRowDef="let row; columns: displayedColumnsOwed;"></tr>
-                </table>
+        <div>
+            <mat-tab-group mat-align-tabs="center">
+                <mat-tab label="Who owes you what?">
+                    <table mat-table [dataSource]="owed">
+                        <ng-container matColumnDef="from">
+                            <th mat-header-cell *matHeaderCellDef>From</th>
+                            <td mat-cell *matCellDef="let o">{{o.From}}</td>
+                        </ng-container>
+                        <ng-container matColumnDef="item_name">
+                            <th mat-header-cell *matHeaderCellDef>Item name</th>
+                            <td mat-cell *matCellDef="let o">{{o["Item Name"]}}</td>
+                        </ng-container>
+                        <ng-container matColumnDef="amount">
+                            <th mat-header-cell *matHeaderCellDef>Amount</th>
+                            <td mat-cell *matCellDef="let o">{{o.Amount}}</td>
+                        </ng-container>
 
-                <mat-tab label="What do you owe?">
-                </mat-tab>
-                <!-- <table>
+                        <ng-container matColumnDef="footer">
+                            <td mat-footer-cell *matFooterCellDef>
+                                <button mat-raised-button color="primary">Add Item</button>
+                            </td>
+                        </ng-container>
+
+                        <tr mat-header-row *matHeaderRowDef="displayedColumnsOwed"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumnsOwed;"></tr>
+
+                        <tr mat-footer-row *matFooterRowDef="['footer']"></tr>
+                    </table>
+
+                    <mat-tab label="What do you owe?">
+                    </mat-tab>
+                    <!-- <table>
                 <tr>
                     <th>To</th>
                     <th>Item Name</th>
                     <th>Amount</th>
                 </tr>
             </table> -->
-            </mat-tab>
-            <mat-tab label="Overview">Content 3</mat-tab>
-        </mat-tab-group>
+                </mat-tab>
+                <mat-tab label="Overview">Content 3</mat-tab>
+            </mat-tab-group>
+        </div>
     </div>
 </div>
