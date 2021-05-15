@@ -48,7 +48,7 @@ export class LoginPageComponent implements OnInit {
 
   getUserDetails(id: Number) {
     this.retrievalService.getUserDetails(id).subscribe(detailsRes => {
-      this.retrievalService.setUserDetails(null, detailsRes['first_name'], detailsRes['surname'], detailsRes['display_name'], detailsRes['group_id']);
+      this.retrievalService.setUserDetails(null, detailsRes[0]['first_name'], detailsRes[0]['surname'], detailsRes[0]['display_name'], detailsRes[0]['group_id']);
     });
   }
 
