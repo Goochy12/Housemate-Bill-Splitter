@@ -15,6 +15,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatInputModule } from '@angular/material/input';
+import { MatToolbarModule } from '@angular/material/toolbar';
+
 
 
 @NgModule({
@@ -34,7 +36,8 @@ import { MatInputModule } from '@angular/material/input';
     MatIconModule,
     MatTableModule,
     MatTabsModule,
-    MatInputModule
+    MatInputModule,
+    MatToolbarModule
   ],
   providers: [CookieService],
   bootstrap: [AppComponent]
