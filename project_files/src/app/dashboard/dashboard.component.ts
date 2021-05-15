@@ -14,6 +14,7 @@ export class DashboardComponent implements OnInit {
 
   user: User;
   owed: {};
+  displayedColumnsOwed: string[] = ['from', 'item_name', 'amount'];
 
   constructor(private route: ActivatedRoute, private retrievalService: RetrievalService, private router: Router, private cookieService: CookieService) { }
 
