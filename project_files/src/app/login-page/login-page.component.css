@@ -14,4 +14,9 @@
   input.example-right-align {
     -moz-appearance: textfield;
   }
-  
+
+.login{
+    text-align: center;
+    margin: auto;
+    width: 50%;
+}
