@@ -19,8 +19,10 @@ export class DashboardComponent implements OnInit {
   owingDetailed: {};
   owedSummary: {};
   owingSummary: {};
+  allUnpaidRecords: {};
   displayedColumnsOwed: string[] = ['from', 'item_name', 'amount'];
   displayedColumnsOwing: string[] = ['to', 'item_name', 'amount'];
+  displayedColumnsAll: string[] = ['to', 'from', 'item_name', 'amount'];
 
   constructor(private route: ActivatedRoute, private retrievalService: RetrievalService,
     private router: Router, public dialog: MatDialog) { }
@@ -42,6 +44,10 @@ export class DashboardComponent implements OnInit {
         this.retrievalService.getOwingSummary(this.user.id).subscribe(res => {
           this.owingSummary = res[0]["Amount"];
         });
+        this.retrievalService.getAllUnpaidRecords().subscribe(res => {
+          this.allUnpaidRecords = res;
+          console.log(res);
+        });
       } else {
         this.router.navigate([""]);
       }
@@ -55,6 +61,10 @@ export class DashboardComponent implements OnInit {
 
   openDialog() {
     this.dialog.open(NewRecordDialogComponent, { data: null })
+  }
+
+  getTotal() {
+    return 0;
   }
 
 }

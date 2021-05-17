@@ -14,36 +14,32 @@
                 <h2>Summary</h2>
                 <p>You owe: <b>{{owingSummary | currency}}</b></p>
                 <p>You are owed: <b>{{owedSummary | currency}}</b></p>
-                <br>
             </div>
 
             <div class="dashboard">
+                <button mat-raised-button color="primary" (click)="openDialog()">Add Item</button>
                 <mat-tab-group mat-align-tabs="center">
-                    <mat-tab label="Who owes you what?">
+                    <mat-tab label="Who owes you?">
                         <table mat-table [dataSource]="owedDetailed">
                             <ng-container matColumnDef="from">
                                 <th mat-header-cell *matHeaderCellDef>From</th>
                                 <td mat-cell *matCellDef="let o">{{o.From}}</td>
+                                <td mat-footer-cell *matFooterCellDef><b>Total</b></td>
                             </ng-container>
                             <ng-container matColumnDef="item_name">
                                 <th mat-header-cell *matHeaderCellDef>Item name</th>
                                 <td mat-cell *matCellDef="let o">{{o["Item Name"]}}</td>
+                                <td mat-footer-cell *matFooterCellDef></td>
                             </ng-container>
                             <ng-container matColumnDef="amount">
                                 <th mat-header-cell *matHeaderCellDef>Amount</th>
                                 <td mat-cell *matCellDef="let o">{{o.Amount | currency}}</td>
-                            </ng-container>
-
-                            <ng-container matColumnDef="footer">
-                                <td mat-footer-cell *matFooterCellDef>
-                                    <button mat-raised-button color="primary" (click)="openDialog()">Add Item</button>
-                                </td>
+                                <td mat-footer-cell *matFooterCellDef>{{getTotal() | currency}}</td>
                             </ng-container>
 
                             <tr mat-header-row *matHeaderRowDef="displayedColumnsOwed"></tr>
                             <tr mat-row *matRowDef="let row; columns: displayedColumnsOwed;"></tr>
-
-                            <tr mat-footer-row *matFooterRowDef="['footer']"></tr>
+                            <tr mat-footer-row *matFooterRowDef="displayedColumnsOwed"></tr>
                         </table>
                     </mat-tab>
 
@@ -52,29 +48,52 @@
                             <ng-container matColumnDef="to">
                                 <th mat-header-cell *matHeaderCellDef>To</th>
                                 <td mat-cell *matCellDef="let o">{{o.To}}</td>
+                                <td mat-footer-cell *matFooterCellDef><b>Total</b></td>
                             </ng-container>
                             <ng-container matColumnDef="item_name">
                                 <th mat-header-cell *matHeaderCellDef>Item name</th>
                                 <td mat-cell *matCellDef="let o">{{o["Item Name"]}}</td>
+                                <td mat-footer-cell *matFooterCellDef></td>
                             </ng-container>
                             <ng-container matColumnDef="amount">
                                 <th mat-header-cell *matHeaderCellDef>Amount</th>
                                 <td mat-cell *matCellDef="let o">{{o.Amount | currency}}</td>
-                            </ng-container>
-
-                            <ng-container matColumnDef="footer">
-                                <td mat-footer-cell *matFooterCellDef>
-                                    <button mat-raised-button color="primary" (click)="openDialog()">Add Item</button>
-                                </td>
+                                <td mat-footer-cell *matFooterCellDef>{{getTotal() | currency}}</td>
                             </ng-container>
 
                             <tr mat-header-row *matHeaderRowDef="displayedColumnsOwing"></tr>
                             <tr mat-row *matRowDef="let row; columns: displayedColumnsOwing;"></tr>
-
-                            <tr mat-footer-row *matFooterRowDef="['footer']"></tr>
+                            <tr mat-footer-row *matFooterRowDef="displayedColumnsOwing"></tr>
                         </table>
                     </mat-tab>
-                    <mat-tab label="Overview">Content 3</mat-tab>
+                    <mat-tab label="Overview">
+                        <table mat-table [dataSource]="allUnpaidRecords">
+                            <ng-container matColumnDef="to">
+                                <th mat-header-cell *matHeaderCellDef>To</th>
+                                <td mat-cell *matCellDef="let r">{{r.To}}</td>
+                                <td mat-footer-cell *matFooterCellDef><b>Total</b></td>
+                            </ng-container>
+                            <ng-container matColumnDef="from">
+                                <th mat-header-cell *matHeaderCellDef>From</th>
+                                <td mat-cell *matCellDef="let r">{{r.From}}</td>
+                                <td mat-footer-cell *matFooterCellDef></td>
+                            </ng-container>
+                            <ng-container matColumnDef="item_name">
+                                <th mat-header-cell *matHeaderCellDef>Item name</th>
+                                <td mat-cell *matCellDef="let r">{{r["Item Name"]}}</td>
+                                <td mat-footer-cell *matFooterCellDef></td>
+                            </ng-container>
+                            <ng-container matColumnDef="amount">
+                                <th mat-header-cell *matHeaderCellDef>Amount</th>
+                                <td mat-cell *matCellDef="let r">{{r.Amount | currency}}</td>
+                                <td mat-footer-cell *matFooterCellDef>{{getTotal() | currency}}</td>
+                            </ng-container>
+
+                            <tr mat-header-row *matHeaderRowDef="displayedColumnsAll"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumnsAll;"></tr>
+                            <tr mat-footer-row *matFooterRowDef="displayedColumnsAll"></tr>
+                        </table>
+                    </mat-tab>
                 </mat-tab-group>
             </div>
         </div>

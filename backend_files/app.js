@@ -207,6 +207,25 @@ app.get('/get_owed_summary', (req, res) => {
     connection.end(); //close the connection
 });
 
+app.get('/get_all_unpaid', (req, res) => {
+    connection = openDBConnection();
+
+    var sql = `SELECT * FROM all_unpaid_records;`;
+
+    connection.query(sql, (err, result) => {
+        if (err) {
+            console.log(err);
+            res.send(null);
+        }
+        if (result[0]) {
+            res.send(result);  //if the result exists
+        } else {
+            res.send(false); //else send false
+        }
+    });
+    connection.end(); //close the connection
+});
+
 app.get('/submit_record', (req, res) => {
     connection = openDBConnection();
 

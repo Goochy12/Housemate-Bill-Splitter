@@ -84,6 +84,11 @@ export class RetrievalService {
     return this.http.get(environment.backendURL + "/get_owing_summary", { params: new HttpParams().set("userID", String(id)) });
   }
 
+
+  getAllUnpaidRecords() {
+    return this.http.get(environment.backendURL + "/get_all_unpaid");
+  }
+
   submitNewRecord(userID: Number, owingID: Number, owedID: Number, itemID: Number, amount: Number) {
     return this.http.get(environment.backendURL + "/submit_record", {
       params: new HttpParams()
