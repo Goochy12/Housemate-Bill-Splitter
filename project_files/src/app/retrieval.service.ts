@@ -54,6 +54,7 @@ export class RetrievalService {
 
   authenticate(username: string, password: string) {
     return this.http.get(environment.backendURL + "/authenticate", { params: new HttpParams().set("username", username).set("password", password) });
+    // return { "exists": true, "id": 1 };
   }
 
   getUserDetails(id: Number) {
@@ -95,7 +96,7 @@ export class RetrievalService {
         .set("userID", String(userID))
         .set("owingID", String(owingID))
         .set("owedID", String(owedID))
-        .set("itemID", String(item))
+        .set("item", String(item))
         .set("amount", String(amount))
     });
   }
