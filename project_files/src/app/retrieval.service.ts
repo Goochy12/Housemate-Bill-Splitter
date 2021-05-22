@@ -89,13 +89,13 @@ export class RetrievalService {
     return this.http.get(environment.backendURL + "/get_all_unpaid");
   }
 
-  submitNewRecord(userID: Number, owingID: Number, owedID: Number, itemID: Number, amount: Number) {
+  submitNewRecord(userID: Number, owingID: Number, owedID: Number, item: string, amount: Number) {
     return this.http.get(environment.backendURL + "/submit_record", {
       params: new HttpParams()
         .set("userID", String(userID))
         .set("owingID", String(owingID))
         .set("owedID", String(owedID))
-        .set("itemID", String(itemID))
+        .set("itemID", String(item))
         .set("amount", String(amount))
     });
   }
