@@ -106,33 +106,12 @@ app.get('/get_item_list', (req, res) => {
     connection.end(); //close the connection
 });
 
-app.get('/get_summary', (req, res) => {
-    connection = openDBConnection();
-
-    var userID = req.query["userID"];
-
-    var sql = `SELECT * FROM summary WHERE ID = \"${userID}\";`;
-
-    connection.query(sql, (err, result) => {
-        if (err) {
-            console.log(err);
-            res.send(null);
-        }
-        if (result) {
-            res.send(result);  //if the result exists
-        } else {
-            res.send(false); //else send false
-        }
-    });
-    connection.end(); //close the connection
-});
-
 app.get('/get_owing_detailed', (req, res) => {
     connection = openDBConnection();
 
     var userID = req.query["userID"];
 
-    var sql = `SELECT * FROM owing_detailed WHERE ID = \"${userID}\";`;
+    var sql = `SELECT * FROM owing_detailed WHERE from_id = \"${userID}\";`;
 
     connection.query(sql, (err, result) => {
         if (err) {
@@ -153,7 +132,7 @@ app.get('/get_owed_detailed', (req, res) => {
 
     var userID = req.query["userID"];
 
-    var sql = `SELECT * FROM owed_detailed WHERE ID = \"${userID}\";`;
+    var sql = `SELECT * FROM owed_detailed WHERE to_id = \"${userID}\";`;
 
     connection.query(sql, (err, result) => {
         if (err) {
@@ -174,7 +153,7 @@ app.get('/get_owing_summary', (req, res) => {
 
     var userID = req.query["userID"];
 
-    var sql = `SELECT * FROM owing_summary WHERE ID = \"${userID}\";`;
+    var sql = `SELECT * FROM owing_summary WHERE from_id = \"${userID}\";`;
 
     connection.query(sql, (err, result) => {
         if (err) {
@@ -195,7 +174,7 @@ app.get('/get_owed_summary', (req, res) => {
 
     var userID = req.query["userID"];
 
-    var sql = `SELECT * FROM owed_summary WHERE ID = \"${userID}\";`;
+    var sql = `SELECT * FROM owed_summary WHERE to_id = \"${userID}\";`;
 
     connection.query(sql, (err, result) => {
         if (err) {
