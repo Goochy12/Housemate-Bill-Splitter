@@ -19,6 +19,7 @@ export class DashboardComponent implements OnInit {
   owingDetailed: {};
   owedSummary: {};
   owingSummary: {};
+  userList: {};
   allUnpaidRecords: {};
   displayedColumnsOwed: string[] = ['from', 'item_name', 'amount'];
   displayedColumnsOwing: string[] = ['to', 'item_name', 'amount'];
@@ -46,8 +47,11 @@ export class DashboardComponent implements OnInit {
         });
         this.retrievalService.getAllUnpaidRecords().subscribe(res => {
           this.allUnpaidRecords = res;
-          console.log(res);
         });
+        this.retrievalService.getUserList(this.user.groupID).subscribe(res => {
+          this.userList = res;
+        }
+        )
       } else {
         this.router.navigate([""]);
       }
@@ -60,7 +64,7 @@ export class DashboardComponent implements OnInit {
   }
 
   openDialog() {
-    this.dialog.open(NewRecordDialogComponent, { data: null })
+    this.dialog.open(NewRecordDialogComponent, { data: { "userList": this.userList, "user": this.user } })
   }
 
   getTotal() {
