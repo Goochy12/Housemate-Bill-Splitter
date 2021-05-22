@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { RetrievalService } from '../retrieval.service';
 import { User } from '../types/User';
 
@@ -16,8 +16,9 @@ export class NewRecordDialogComponent implements OnInit {
   user: User = null;
   owingID: Number = null;
   owedID: Number = null;
+  owedDisplayName: string = null;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: {}, private retrievalService: RetrievalService) { }
+  constructor(@Inject(MAT_DIALOG_DATA) public data: {}, private retrievalService: RetrievalService, private dialogRef: MatDialogRef<NewRecordDialogComponent>) { }
 
   ngOnInit(): void {
     this.user = this.data["user"];
@@ -25,7 +26,12 @@ export class NewRecordDialogComponent implements OnInit {
   }
 
   submit() {
-    this.retrievalService.submitNewRecord(this.user.id, this.owingID, this.owedID, this.itemValue, Number(this.amountValue));
+    // console.log(this.owedID);
+    this.retrievalService.submitNewRecord(this.user.id, this.owingID, this.owedID, this.itemValue, Number(this.amountValue)).subscribe(res => {
+      if (res) {
+        this.dialogRef.close({ "refresh": true });
+      }
+    });
   }
 
 }

@@ -2,17 +2,20 @@
     <div class="component">
         <mat-form-field appearance="fill" class="component">
             <mat-label>Money Sent To</mat-label>
-            <mat-select>
-                <mat-option value="option">Option</mat-option>
+            <mat-select [(value)]="owedID">
+                <mat-option *ngFor="let u of userList" [value]="u.id">
+                    {{u.display_name}}
+                </mat-option>
             </mat-select>
+            <mat-error *ngIf="!owedID">Due Date is required for Tasks</mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="fill" class="component">
             <mat-label>Money Sent From</mat-label>
-            <mat-select>
-                <!-- <mat-option *ngFor="let u of userList" [value]="owingID">
+            <mat-select [(value)]="owingID">
+                <mat-option *ngFor="let u of userList" [value]="u.id">
                     {{u.display_name}}
-                </mat-option> -->
+                </mat-option>
             </mat-select>
         </mat-form-field>
 
