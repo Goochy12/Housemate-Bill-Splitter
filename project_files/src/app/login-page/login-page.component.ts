@@ -12,6 +12,8 @@ export class LoginPageComponent implements OnInit {
   username: string = null;
   password: string = null;
 
+  loading: boolean = false;
+
   hidePassword: boolean = true;
 
   constructor(private route: ActivatedRoute, private retrievalService: RetrievalService, private router: Router) { }
@@ -26,6 +28,7 @@ export class LoginPageComponent implements OnInit {
   }
 
   buttonOnSelect() {
+    this.loading = true;
     this.retrievalService.authenticate(this.username, this.password).subscribe(authRes => {
       if (authRes) {
         if (authRes["exists"]) {
