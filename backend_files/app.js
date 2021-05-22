@@ -36,7 +36,7 @@ app.get('/authenticate', (req, res) => {
             console.log(err);
             res.send(null);
         }
-        if (result[0]) {
+        if (result) {
             res.send({ "exists": true, "id": result[0]["id"] });  //if the result exists
         } else {
             res.send(false); //else send false
@@ -57,13 +57,13 @@ app.get('/get_user_details', (req, res) => {
             console.log(err);
             res.send(null);
         }
-        if (result[0]) {
+        if (result) {
             res.send(result);  //if the result exists
         } else {
             res.send(false); //else send false
         }
-        connection.end(); //close the connection
     });
+    connection.end(); //close the connection
 });
 
 app.get('/get_user_list', (req, res) => {
@@ -78,13 +78,13 @@ app.get('/get_user_list', (req, res) => {
             console.log(err);
             res.send(null);
         }
-        if (result[0]) {
+        if (result) {
             res.send(result);  //if the result exists
         } else {
             res.send(false); //else send false
         }
-        connection.end(); //close the connection
     });
+    connection.end(); //close the connection
 });
 
 app.get('/get_item_list', (req, res) => {
@@ -97,13 +97,13 @@ app.get('/get_item_list', (req, res) => {
             console.log(err);
             res.send(null);
         }
-        if (result[0]) {
+        if (result) {
             res.send(result);  //if the result exists
         } else {
             res.send(false); //else send false
         }
-        connection.end(); //close the connection
     });
+    connection.end(); //close the connection
 });
 
 app.get('/get_summary', (req, res) => {
@@ -118,13 +118,13 @@ app.get('/get_summary', (req, res) => {
             console.log(err);
             res.send(null);
         }
-        if (result[0]) {
+        if (result) {
             res.send(result);  //if the result exists
         } else {
             res.send(false); //else send false
         }
-        connection.end(); //close the connection
     });
+    connection.end(); //close the connection
 });
 
 app.get('/get_owing_detailed', (req, res) => {
@@ -139,13 +139,13 @@ app.get('/get_owing_detailed', (req, res) => {
             console.log(err);
             res.send(null);
         }
-        if (result[0]) {
+        if (result) {
             res.send(result);  //if the result exists
         } else {
             res.send(false); //else send false
         }
-        connection.end(); //close the connection
     });
+    connection.end(); //close the connection
 });
 
 app.get('/get_owed_detailed', (req, res) => {
@@ -160,13 +160,13 @@ app.get('/get_owed_detailed', (req, res) => {
             console.log(err);
             res.send(null);
         }
-        if (result[0]) {
+        if (result) {
             res.send(result);  //if the result exists
         } else {
             res.send(false); //else send false
         }
-        connection.end(); //close the connection
     });
+    connection.end(); //close the connection
 });
 
 app.get('/get_owing_summary', (req, res) => {
@@ -181,13 +181,13 @@ app.get('/get_owing_summary', (req, res) => {
             console.log(err);
             res.send(null);
         }
-        if (result[0]) {
+        if (result) {
             res.send(result);  //if the result exists
         } else {
             res.send(false); //else send false
         }
-        connection.end(); //close the connection
     });
+    connection.end(); //close the connection
 });
 
 app.get('/get_owed_summary', (req, res) => {
@@ -202,13 +202,13 @@ app.get('/get_owed_summary', (req, res) => {
             console.log(err);
             res.send(null);
         }
-        if (result[0]) {
+        if (result) {
             res.send(result);  //if the result exists
         } else {
             res.send(false); //else send false
         }
-        connection.end(); //close the connection
     });
+    connection.end(); //close the connection
 });
 
 app.get('/get_all_unpaid', (req, res) => {
@@ -221,13 +221,13 @@ app.get('/get_all_unpaid', (req, res) => {
             console.log(err);
             res.send(null);
         }
-        if (result[0]) {
+        if (result) {
             res.send(result);  //if the result exists
         } else {
             res.send(false); //else send false
         }
-        connection.end(); //close the connection
     });
+    connection.end(); //close the connection
 });
 
 app.get('/submit_record', (req, res) => {
@@ -252,8 +252,8 @@ app.get('/submit_record', (req, res) => {
         if (result) {
             res.send(result);
         }
-        connection.end(); //close the connection
     });
+    connection.end(); //close the connection
 });
 
 app.get('/update_record_paid', (req, res) => {
@@ -273,8 +273,8 @@ app.get('/update_record_paid', (req, res) => {
         } else {
             res.send(false); //else send false
         }
-        connection.end(); //close the connection
     });
+    connection.end(); //close the connection
 });
 
 app.listen(process.env.PORT | 3000, () => {
