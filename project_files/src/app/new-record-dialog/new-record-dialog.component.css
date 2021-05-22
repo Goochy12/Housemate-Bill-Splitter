@@ -1,0 +1,12 @@
+.spacer {
+    flex: 1 1 auto;
+  }
+
+.right-align{
+    align-self: flex-end;
+}
+
+.component{
+    padding: 1%;
+    margin: auto;
+}

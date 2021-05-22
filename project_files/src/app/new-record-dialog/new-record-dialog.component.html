@@ -1,1 +1,38 @@
-<p>new-record-dialog works!</p>
+<div>
+    <div class="component">
+        <mat-form-field appearance="fill" class="component">
+            <mat-label>Money Sent To</mat-label>
+            <mat-select>
+                <mat-option value="option">Option</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="component">
+            <mat-label>Money Sent From</mat-label>
+            <mat-select>
+                <!-- <mat-option *ngFor="let u of userList" [value]="owingID">
+                    {{u.display_name}}
+                </mat-option> -->
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="component">
+            <mat-label>Item Name</mat-label>
+            <input matInput type="text" [(ngModel)]="itemValue">
+            <button mat-button *ngIf="itemValue" matSuffix mat-icon-button aria-label="Clear" (click)="itemValue=''">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="component">
+            <mat-label>Amount</mat-label>
+            <input matInput type="number" [(ngModel)]="amountValue">
+            <button mat-button *ngIf="amountValue" matSuffix mat-icon-button aria-label="Clear"
+                (click)="amountValue=''">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-form-field>
+    </div>
+    <button mat-raised-button color="primary" (click)="submit()">Submit</button>
+    <button class="right-align" mat-raised-button mat-dialog-close>Cancel</button>
+</div>
