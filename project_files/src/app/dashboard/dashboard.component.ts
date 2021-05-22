@@ -52,12 +52,12 @@ export class DashboardComponent implements OnInit {
     this.retrievalService.getOwedDetailed(this.user.id).subscribe(res => {
       this.owedDetailed = res;
       this.newOwedDetailed = res;
-      this.filter();
+      this.filterRows();
     });
     this.retrievalService.getOwingDetailed(this.user.id).subscribe(res => {
       this.owingDetailed = res;
       this.newOwingDetailed = res;
-      this.filter();
+      this.filterRows();
     });
     this.retrievalService.getOwedSummary(this.user.id).subscribe(res => {
       this.owedSummary = res[0]["Amount"];
@@ -108,7 +108,7 @@ export class DashboardComponent implements OnInit {
     }
   }
 
-  filter() {
+  filterRows() {
     if (this.owedFilterValue) {
       this.newOwedDetailed = this.owedDetailed.filter(c => {
         return c.From == this.owedFilterValue;
@@ -118,7 +118,7 @@ export class DashboardComponent implements OnInit {
     }
     if (this.owingFilterValue) {
       this.newOwingDetailed = this.owingDetailed.filter(c => {
-        return c.From == this.owingFilterValue;
+        return c.To == this.owingFilterValue;
       })
     } else {
       this.newOwingDetailed = this.owingDetailed;

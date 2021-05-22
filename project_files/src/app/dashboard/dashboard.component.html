@@ -22,7 +22,7 @@
                     <mat-tab label="Who owes you?">
                         <mat-form-field>
                             <mat-label>Filter</mat-label>
-                            <mat-select [(value)]="owedFilterValue" (selectionChange)="filter()">
+                            <mat-select [(value)]="owedFilterValue" (selectionChange)="filterRows()">
                                 <mat-option [value]="null">All</mat-option>
                                 <mat-option *ngFor="let u of userList" [value]="u.display_name">
                                     {{u.display_name}}
@@ -62,7 +62,7 @@
                     <mat-tab label="What do you owe?">
                         <mat-form-field>
                             <mat-label>Filter</mat-label>
-                            <mat-select [(value)]="owingFilterValue" (selectionChange)="filter()">
+                            <mat-select [(value)]="owingFilterValue" (selectionChange)="filterRows()">
                                 <mat-option [value]="null">All</mat-option>
                                 <mat-option *ngFor="let u of userList" [value]="u.display_name">
                                     {{u.display_name}}
@@ -101,7 +101,7 @@
                     <mat-tab label="Overview">
                         <!-- <mat-form-field>
                             <mat-label>Filter</mat-label>
-                            <mat-select [(value)]="overviewFilterValue" (selectionChange)="filter()">
+                            <mat-select [(value)]="overviewFilterValue" (selectionChange)="filterRows()">
                                 <mat-option [value]="null">All</mat-option>
                                 <mat-option *ngFor="let u of userList" [value]="u.display_name">
                                     {{u.display_name}}
