@@ -104,7 +104,7 @@ export class RetrievalService {
   setRecordPaid(recordID: Number) {
     return this.http.get(environment.backendURL + "/update_record_paid", {
       params: new HttpParams()
-        .set("userID", String(recordID))
+        .set("recordID", String(recordID))
     });
   }
 }
