@@ -18,6 +18,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatDialogModule } from '@angular/material/dialog';
 import { NewRecordDialogComponent } from './new-record-dialog/new-record-dialog.component';
+import { MatSelectModule } from '@angular/material/select';
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import { NewRecordDialogComponent } from './new-record-dialog/new-record-dialog.
     MatTabsModule,
     MatInputModule,
     MatToolbarModule,
-    MatDialogModule
+    MatDialogModule,
+    MatSelectModule
   ],
   providers: [CookieService],
   bootstrap: [AppComponent]
