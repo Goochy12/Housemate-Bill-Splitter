@@ -23,7 +23,7 @@ export class DashboardComponent implements OnInit {
   owingSummary: {};
   userList: {};
   allUnpaidRecords: {};
-  displayedColumnsOwed: string[] = ['from', 'item_name', 'amount'];
+  displayedColumnsOwed: string[] = ['from', 'item_name', 'amount', 'paid'];
   displayedColumnsOwing: string[] = ['to', 'item_name', 'amount'];
   displayedColumnsAll: string[] = ['to', 'from', 'item_name', 'amount'];
   owedFilterValue: string = null;
@@ -123,6 +123,10 @@ export class DashboardComponent implements OnInit {
     }
 
     this.calculateTotals();
+  }
+
+  markPaid(id: Number) {
+    console.log(id);
   }
 
 }

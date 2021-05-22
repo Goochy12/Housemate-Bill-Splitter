@@ -45,6 +45,13 @@
                                 <td mat-cell *matCellDef="let o">{{o.Amount | currency}}</td>
                                 <td mat-footer-cell *matFooterCellDef>{{owedTotal | currency}}</td>
                             </ng-container>
+                            <ng-container matColumnDef="paid">
+                                <th mat-header-cell *matHeaderCellDef>Mark Paid</th>
+                                <td mat-cell *matCellDef="let o">
+                                    <button mat-raised-button (click)="markPaid(o.record_id)">Mark Paid</button>
+                                </td>
+                                <td mat-footer-cell *matFooterCellDef></td>
+                            </ng-container>
 
                             <tr mat-header-row *matHeaderRowDef="displayedColumnsOwed"></tr>
                             <tr mat-row *matRowDef="let row; columns: displayedColumnsOwed;"></tr>

@@ -5,6 +5,10 @@ table {
     margin-bottom: 48px;
   }
 
+  .mat-column{
+    width: 25%;
+  }
+
   .spacer {
     flex: 1 1 auto;
   }
