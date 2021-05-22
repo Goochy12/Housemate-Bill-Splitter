@@ -62,6 +62,7 @@ app.get('/get_user_details', (req, res) => {
         } else {
             res.send(false); //else send false
         }
+        connection.end(); //close the connection
     });
 });
 
@@ -82,6 +83,7 @@ app.get('/get_user_list', (req, res) => {
         } else {
             res.send(false); //else send false
         }
+        connection.end(); //close the connection
     });
 });
 
@@ -100,6 +102,7 @@ app.get('/get_item_list', (req, res) => {
         } else {
             res.send(false); //else send false
         }
+        connection.end(); //close the connection
     });
 });
 
@@ -120,6 +123,7 @@ app.get('/get_summary', (req, res) => {
         } else {
             res.send(false); //else send false
         }
+        connection.end(); //close the connection
     });
 });
 
@@ -140,8 +144,8 @@ app.get('/get_owing_detailed', (req, res) => {
         } else {
             res.send(false); //else send false
         }
+        connection.end(); //close the connection
     });
-    connection.end(); //close the connection
 });
 
 app.get('/get_owed_detailed', (req, res) => {
@@ -161,8 +165,8 @@ app.get('/get_owed_detailed', (req, res) => {
         } else {
             res.send(false); //else send false
         }
+        connection.end(); //close the connection
     });
-    connection.end(); //close the connection
 });
 
 app.get('/get_owing_summary', (req, res) => {
@@ -182,8 +186,8 @@ app.get('/get_owing_summary', (req, res) => {
         } else {
             res.send(false); //else send false
         }
+        connection.end(); //close the connection
     });
-    connection.end(); //close the connection
 });
 
 app.get('/get_owed_summary', (req, res) => {
@@ -203,8 +207,8 @@ app.get('/get_owed_summary', (req, res) => {
         } else {
             res.send(false); //else send false
         }
+        connection.end(); //close the connection
     });
-    connection.end(); //close the connection
 });
 
 app.get('/get_all_unpaid', (req, res) => {
@@ -222,8 +226,8 @@ app.get('/get_all_unpaid', (req, res) => {
         } else {
             res.send(false); //else send false
         }
+        connection.end(); //close the connection
     });
-    connection.end(); //close the connection
 });
 
 app.get('/submit_record', (req, res) => {
@@ -233,11 +237,11 @@ app.get('/submit_record', (req, res) => {
     var userID = req.query["userID"];
     var owedID = req.query["owedID"];
     var owingID = req.query["owingID"];
-    var itemID = req.query["itemID"];
+    var item = req.query["item"];
     var amount = req.query["amount"];
 
-    var sql = `INSERT INTO record (item_id, value, submitted_by_id, owed_id, owing_id, date_submitted)
-    values (` + mysql.escape(itemID) + `, ` + mysql.escape(amount) + `, ` + mysql.escape(userID) + `, ` + mysql.escape(owedID) + `,
+    var sql = `INSERT INTO record (item, value, submitted_by_id, owed_id, owing_id, date_submitted)
+    values (` + mysql.escape(item) + `, ` + mysql.escape(amount) + `, ` + mysql.escape(userID) + `, ` + mysql.escape(owedID) + `,
     ` + mysql.escape(owingID) + `, current_timestamp());`;
 
     connection.query(sql, (err, result) => {
@@ -248,8 +252,8 @@ app.get('/submit_record', (req, res) => {
         if (result) {
             res.send(result);
         }
+        connection.end(); //close the connection
     });
-    connection.end(); //close the connection
 });
 
 app.get('/update_record_paid', (req, res) => {
@@ -269,8 +273,8 @@ app.get('/update_record_paid', (req, res) => {
         } else {
             res.send(false); //else send false
         }
+        connection.end(); //close the connection
     });
-    connection.end(); //close the connection
 });
 
 app.listen(process.env.PORT | 3000, () => {
