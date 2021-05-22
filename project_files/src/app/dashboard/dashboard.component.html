@@ -20,7 +20,16 @@
                 <button mat-raised-button color="primary" (click)="openDialog()">Add Item</button>
                 <mat-tab-group mat-align-tabs="center">
                     <mat-tab label="Who owes you?">
-                        <table mat-table [dataSource]="owedDetailed">
+                        <mat-form-field>
+                            <mat-label>Filter</mat-label>
+                            <mat-select [(value)]="owedFilterValue" (selectionChange)="filter()">
+                                <mat-option [value]="null">All</mat-option>
+                                <mat-option *ngFor="let u of userList" [value]="u.display_name">
+                                    {{u.display_name}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <table mat-table [dataSource]="newOwedDetailed">
                             <ng-container matColumnDef="from">
                                 <th mat-header-cell *matHeaderCellDef>From</th>
                                 <td mat-cell *matCellDef="let o">{{o.From}}</td>
@@ -34,7 +43,7 @@
                             <ng-container matColumnDef="amount">
                                 <th mat-header-cell *matHeaderCellDef>Amount</th>
                                 <td mat-cell *matCellDef="let o">{{o.Amount | currency}}</td>
-                                <td mat-footer-cell *matFooterCellDef>{{getTotal() | currency}}</td>
+                                <td mat-footer-cell *matFooterCellDef>{{owedTotal | currency}}</td>
                             </ng-container>
 
                             <tr mat-header-row *matHeaderRowDef="displayedColumnsOwed"></tr>
@@ -44,7 +53,16 @@
                     </mat-tab>
 
                     <mat-tab label="What do you owe?">
-                        <table mat-table [dataSource]="owingDetailed">
+                        <mat-form-field>
+                            <mat-label>Filter</mat-label>
+                            <mat-select [(value)]="owingFilterValue" (selectionChange)="filter()">
+                                <mat-option [value]="null">All</mat-option>
+                                <mat-option *ngFor="let u of userList" [value]="u.display_name">
+                                    {{u.display_name}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <table mat-table [dataSource]="newOwingDetailed">
                             <ng-container matColumnDef="to">
                                 <th mat-header-cell *matHeaderCellDef>To</th>
                                 <td mat-cell *matCellDef="let o">{{o.To}}</td>
@@ -58,7 +76,7 @@
                             <ng-container matColumnDef="amount">
                                 <th mat-header-cell *matHeaderCellDef>Amount</th>
                                 <td mat-cell *matCellDef="let o">{{o.Amount | currency}}</td>
-                                <td mat-footer-cell *matFooterCellDef>{{getTotal() | currency}}</td>
+                                <td mat-footer-cell *matFooterCellDef>{{owingTotal | currency}}</td>
                             </ng-container>
 
                             <tr mat-header-row *matHeaderRowDef="displayedColumnsOwing"></tr>
@@ -71,27 +89,27 @@
                             <ng-container matColumnDef="to">
                                 <th mat-header-cell *matHeaderCellDef>To</th>
                                 <td mat-cell *matCellDef="let r">{{r.To}}</td>
-                                <td mat-footer-cell *matFooterCellDef><b>Total</b></td>
+                                <!-- <td mat-footer-cell *matFooterCellDef><b>Total</b></td> -->
                             </ng-container>
                             <ng-container matColumnDef="from">
                                 <th mat-header-cell *matHeaderCellDef>From</th>
                                 <td mat-cell *matCellDef="let r">{{r.From}}</td>
-                                <td mat-footer-cell *matFooterCellDef></td>
+                                <!-- <td mat-footer-cell *matFooterCellDef></td> -->
                             </ng-container>
                             <ng-container matColumnDef="item_name">
                                 <th mat-header-cell *matHeaderCellDef>Item name</th>
                                 <td mat-cell *matCellDef="let r">{{r["Item Name"]}}</td>
-                                <td mat-footer-cell *matFooterCellDef></td>
+                                <!-- <td mat-footer-cell *matFooterCellDef></td> -->
                             </ng-container>
                             <ng-container matColumnDef="amount">
                                 <th mat-header-cell *matHeaderCellDef>Amount</th>
                                 <td mat-cell *matCellDef="let r">{{r.Amount | currency}}</td>
-                                <td mat-footer-cell *matFooterCellDef>{{getTotal() | currency}}</td>
+                                <!-- <td mat-footer-cell *matFooterCellDef>{{getTotal() | currency}}</td> -->
                             </ng-container>
 
                             <tr mat-header-row *matHeaderRowDef="displayedColumnsAll"></tr>
                             <tr mat-row *matRowDef="let row; columns: displayedColumnsAll;"></tr>
-                            <tr mat-footer-row *matFooterRowDef="displayedColumnsAll"></tr>
+                            <!-- <tr mat-footer-row *matFooterRowDef="displayedColumnsAll"></tr> -->
                         </table>
                     </mat-tab>
                 </mat-tab-group>
