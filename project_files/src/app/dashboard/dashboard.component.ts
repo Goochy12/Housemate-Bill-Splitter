@@ -23,11 +23,13 @@ export class DashboardComponent implements OnInit {
   owingSummary: {};
   userList: {};
   allUnpaidRecords: {};
+  newAllUnpaidRecords: {};
   displayedColumnsOwed: string[] = ['from', 'item_name', 'amount', 'paid'];
-  displayedColumnsOwing: string[] = ['to', 'item_name', 'amount'];
-  displayedColumnsAll: string[] = ['to', 'from', 'item_name', 'amount'];
+  displayedColumnsOwing: string[] = ['to', 'item_name', 'amount', 'paid'];
+  displayedColumnsAll: string[] = ['to', 'from', 'item_name', 'amount', 'paid'];
   owedFilterValue: string = null;
   owingFilterValue: string = null;
+  overviewFilterValue: string = null;
   owedTotal: Number = null;
   owingTotal: Number = null;
 
@@ -50,12 +52,12 @@ export class DashboardComponent implements OnInit {
     this.retrievalService.getOwedDetailed(this.user.id).subscribe(res => {
       this.owedDetailed = res;
       this.newOwedDetailed = res;
-      this.calculateTotals();
+      this.filter();
     });
     this.retrievalService.getOwingDetailed(this.user.id).subscribe(res => {
       this.owingDetailed = res;
       this.newOwingDetailed = res;
-      this.calculateTotals();
+      this.filter();
     });
     this.retrievalService.getOwedSummary(this.user.id).subscribe(res => {
       this.owedSummary = res[0]["Amount"];
@@ -126,7 +128,11 @@ export class DashboardComponent implements OnInit {
   }
 
   markPaid(id: Number) {
-    console.log(id);
+    this.retrievalService.setRecordPaid(id).subscribe(res => {
+      if (res) {
+        this.getAllData();
+      }
+    })
   }
 
 }
