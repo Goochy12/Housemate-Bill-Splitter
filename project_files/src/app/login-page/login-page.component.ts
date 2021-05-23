@@ -35,6 +35,7 @@ export class LoginPageComponent implements OnInit {
           this.retrievalService.createUser(authRes['id']);
           this.getUserDetails(authRes['id']);
           localStorage.setItem('userCookie', authRes['id']);
+          this.loading = false;
           this.router.navigate(['dashboard']);
         }
       } else {
