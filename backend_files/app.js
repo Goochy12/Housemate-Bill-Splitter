@@ -20,10 +20,6 @@ function openDBConnection() {
     return connection;  //return the open connection
 }
 
-app.get('/', (req, res) => {
-    // res.send('Hello World!')
-});
-
 app.get('/authenticate', (req, res) => {
     connection = openDBConnection();
 
@@ -264,7 +260,10 @@ app.get('/update_record_paid', (req, res) => {
     connection.end(); //close the connection
 });
 
+//standard for default route
+app.get("/", (req, res) => {
+    res.send("You do not have access to this server.");
+});
 
-
-app.listen(process.env.PORT | 3000, () => {
+app.listen(process.env.PORT, () => {
 });
