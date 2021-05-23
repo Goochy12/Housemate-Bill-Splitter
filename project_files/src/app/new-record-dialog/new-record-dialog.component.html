@@ -45,7 +45,7 @@
             </mat-form-field>
         </form>
     </div>
-    <button [disabled]="!owedID || !owingID || !itemValue || !amountValue" mat-raised-button color="primary"
-        (click)="submit()">Submit</button>
+    <button [disabled]="!owedID || !owingID || !itemValue || !amountValue || owedID === owingID" mat-raised-button
+        color="primary" (click)="submit()">Submit</button>
     <button class="right-align" mat-raised-button mat-dialog-close>Cancel</button>
 </div>
