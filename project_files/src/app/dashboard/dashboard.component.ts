@@ -75,15 +75,19 @@ export class DashboardComponent implements OnInit {
     });
     this.retrievalService.getOwedSummary(this.user.id, this.user.groupID).subscribe(res => {
       if (res[0]) {
-        this.loadingOwedSummary = false;
         this.owedSummary = res[0].Amount;
+      } else {
+        this.owedSummary = 0;
       }
+      this.loadingOwedSummary = false;
     });
     this.retrievalService.getOwingSummary(this.user.id, this.user.groupID).subscribe(res => {
       if (res[0]) {
-        this.loadingOwingSummary = false;
         this.owingSummary = res[0].Amount;
+      } else {
+        this.owingSummary = 0;
       }
+      this.loadingOwingSummary = false;
     });
     this.retrievalService.getAllUnpaidRecords(this.user.groupID).subscribe(res => {
       if (res) {
