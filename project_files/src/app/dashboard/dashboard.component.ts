@@ -19,8 +19,8 @@ export class DashboardComponent implements OnInit {
   owingDetailed;
   newOwedDetailed;
   newOwingDetailed;
-  owedSummary: {};
-  owingSummary: {};
+  owedSummary = 0;
+  owingSummary = 0;
   userList: {};
   itemList: {};
   allUnpaidRecords: {};
