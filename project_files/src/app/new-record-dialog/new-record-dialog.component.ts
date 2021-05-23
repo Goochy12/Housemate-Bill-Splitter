@@ -27,11 +27,17 @@ export class NewRecordDialogComponent implements OnInit {
 
   submit() {
     // console.log(this.owedID);
-    this.retrievalService.submitNewRecord(this.user.id, this.owingID, this.owedID, this.itemValue, Number(this.amountValue)).subscribe(res => {
-      if (res) {
-        this.dialogRef.close({ "refresh": true });
-      }
-    });
+    this.retrievalService.submitNewRecord(
+      this.user.id
+      , this.user.groupID
+      , this.owingID
+      , this.owedID
+      , this.itemValue
+      , Number(this.amountValue)).subscribe(res => {
+        if (res) {
+          this.dialogRef.close({ "refresh": true });
+        }
+      });
   }
 
 }

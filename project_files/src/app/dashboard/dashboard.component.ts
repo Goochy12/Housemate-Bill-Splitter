@@ -56,32 +56,44 @@ export class DashboardComponent implements OnInit {
   }
 
   getAllData() {
-    this.retrievalService.getOwedDetailed(this.user.id).subscribe(res => {
-      this.loadingOwed = false;
-      this.owedDetailed = res;
-      this.newOwedDetailed = res;
-      this.filterRows();
+    this.retrievalService.getOwedDetailed(this.user.id, this.user.groupID).subscribe(res => {
+      if (res) {
+        this.loadingOwed = false;
+        this.owedDetailed = res;
+        this.newOwedDetailed = res;
+        this.filterRows();
+      }
     });
-    this.retrievalService.getOwingDetailed(this.user.id).subscribe(res => {
-      this.loadingOwing = false;
-      this.owingDetailed = res;
-      this.newOwingDetailed = res;
-      this.filterRows();
+    this.retrievalService.getOwingDetailed(this.user.id, this.user.groupID).subscribe(res => {
+      if (res) {
+        this.loadingOwing = false;
+        this.owingDetailed = res;
+        this.newOwingDetailed = res;
+        this.filterRows();
+      }
     });
-    this.retrievalService.getOwedSummary(this.user.id).subscribe(res => {
-      this.loadingOwedSummary = false;
-      this.owedSummary = res[0]["Amount"];
+    this.retrievalService.getOwedSummary(this.user.id, this.user.groupID).subscribe(res => {
+      if (res[0]) {
+        this.loadingOwedSummary = false;
+        this.owedSummary = res[0].Amount;
+      }
     });
-    this.retrievalService.getOwingSummary(this.user.id).subscribe(res => {
-      this.loadingOwingSummary = false;
-      this.owingSummary = res[0]["Amount"];
+    this.retrievalService.getOwingSummary(this.user.id, this.user.groupID).subscribe(res => {
+      if (res[0]) {
+        this.loadingOwingSummary = false;
+        this.owingSummary = res[0].Amount;
+      }
     });
-    this.retrievalService.getAllUnpaidRecords().subscribe(res => {
-      this.loadingAll = false;
-      this.allUnpaidRecords = res;
+    this.retrievalService.getAllUnpaidRecords(this.user.groupID).subscribe(res => {
+      if (res) {
+        this.loadingAll = false;
+        this.allUnpaidRecords = res;
+      }
     });
     this.retrievalService.getUserList(this.user.groupID).subscribe(res => {
-      this.userList = res;
+      if (res) {
+        this.userList = res;
+      }
     }
     )
   }
@@ -140,7 +152,7 @@ export class DashboardComponent implements OnInit {
   }
 
   markPaid(id: Number) {
-    this.retrievalService.setRecordPaid(id).subscribe(res => {
+    this.retrievalService.setRecordPaid(id, this.user.groupID).subscribe(res => {
       if (res) {
         this.getAllData();
       }

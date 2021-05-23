@@ -65,35 +65,48 @@ export class RetrievalService {
     return this.http.get(environment.backendURL + "/get_item_list");
   }
 
-  getUserList(id: Number) {
-    return this.http.get(environment.backendURL + "/get_user_list", { params: new HttpParams().set("groupID", String(id)) });
+  getUserList(groupID: Number) {
+    return this.http.get(environment.backendURL + "/get_user_list", { params: new HttpParams().set("groupID", String(groupID)) });
   }
 
-  getOwedDetailed(id: Number) {
-    return this.http.get(environment.backendURL + "/get_owed_detailed", { params: new HttpParams().set("userID", String(id)) });
+  getOwedDetailed(id: Number, groupID: Number) {
+    return this.http.get(environment.backendURL + "/get_owed_detailed", {
+      params: new HttpParams().set("userID", String(id))
+        .set("groupID", String(groupID))
+    });
   }
 
-  getOwingDetailed(id: Number) {
-    return this.http.get(environment.backendURL + "/get_owing_detailed", { params: new HttpParams().set("userID", String(id)) });
+  getOwingDetailed(id: Number, groupID: Number) {
+    return this.http.get(environment.backendURL + "/get_owing_detailed", {
+      params: new HttpParams().set("userID", String(id))
+        .set("groupID", String(groupID))
+    });
   }
 
-  getOwedSummary(id: Number) {
-    return this.http.get(environment.backendURL + "/get_owed_summary", { params: new HttpParams().set("userID", String(id)) });
+  getOwedSummary(id: Number, groupID: Number) {
+    return this.http.get(environment.backendURL + "/get_owed_summary", {
+      params: new HttpParams().set("userID", String(id))
+        .set("groupID", String(groupID))
+    });
   }
 
-  getOwingSummary(id: Number) {
-    return this.http.get(environment.backendURL + "/get_owing_summary", { params: new HttpParams().set("userID", String(id)) });
+  getOwingSummary(id: Number, groupID: Number) {
+    return this.http.get(environment.backendURL + "/get_owing_summary", {
+      params: new HttpParams().set("userID", String(id))
+        .set("groupID", String(groupID))
+    });
   }
 
 
-  getAllUnpaidRecords() {
-    return this.http.get(environment.backendURL + "/get_all_unpaid");
+  getAllUnpaidRecords(groupID: Number) {
+    return this.http.get(environment.backendURL + "/get_all_unpaid", { params: new HttpParams().set("groupID", String(groupID)) });
   }
 
-  submitNewRecord(userID: Number, owingID: Number, owedID: Number, item: string, amount: Number) {
+  submitNewRecord(userID: Number, groupID: Number, owingID: Number, owedID: Number, item: string, amount: Number) {
     return this.http.get(environment.backendURL + "/submit_record", {
       params: new HttpParams()
         .set("userID", String(userID))
+        .set("groupID", String(groupID))
         .set("owingID", String(owingID))
         .set("owedID", String(owedID))
         .set("item", String(item))
@@ -101,10 +114,11 @@ export class RetrievalService {
     });
   }
 
-  setRecordPaid(recordID: Number) {
+  setRecordPaid(recordID: Number, groupID: Number) {
     return this.http.get(environment.backendURL + "/update_record_paid", {
       params: new HttpParams()
         .set("recordID", String(recordID))
+        .set("groupID", String(groupID))
     });
   }
 }
