@@ -335,3 +335,4 @@ ASALocalRun/
 
 node_modules/
 .env
+/project_files/dist
