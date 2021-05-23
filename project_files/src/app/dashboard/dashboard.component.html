@@ -1,4 +1,7 @@
 <div>
+    <div *ngIf="loadingOwedSummary && loadingOwingSummary && loadingOwed && loadingOwing && loadingAll">
+        <mat-spinner class="spinner"></mat-spinner>
+    </div>
     <div *ngIf="user">
         <div *ngIf="user.display_name">
 

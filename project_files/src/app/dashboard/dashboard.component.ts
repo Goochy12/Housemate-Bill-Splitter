@@ -38,6 +38,7 @@ export class DashboardComponent implements OnInit {
   loadingOwed: boolean = true;
   loadingOwing: boolean = true;
   loadingAll: boolean = true;
+  loading: boolean = true;
 
   constructor(private route: ActivatedRoute, private retrievalService: RetrievalService,
     private router: Router, public dialog: MatDialog) { }
