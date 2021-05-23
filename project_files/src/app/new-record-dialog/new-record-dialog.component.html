@@ -21,17 +21,18 @@
 
             <mat-form-field appearance="fill" class="component">
                 <mat-label>Item Name</mat-label>
-                <input matInput type="text" placeholder="Item Description..." [formControl]="myControl"
-                    [matAutocomplete]="auto" name="item">
-                <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-                    <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-                        {{option.name}}
-                    </mat-option>
-                </mat-autocomplete>
+                <input matInput type="text" [(ngModel)]="itemValue" placeholder="Item Description..."
+                    [formControl]="myControl" [matAutocomplete]="auto" name="item">
                 <button mat-button *ngIf="itemValue" matSuffix mat-icon-button aria-label="Clear"
                     (click)="itemValue=''">
                     <mat-icon>close</mat-icon>
                 </button>
+                <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                    <mat-option *ngFor="let option of filteredOptions | async" [value]="option.name">
+                        {{option.name}}
+                    </mat-option>
+                </mat-autocomplete>
+
             </mat-form-field>
 
             <mat-form-field appearance="fill" class="component">
