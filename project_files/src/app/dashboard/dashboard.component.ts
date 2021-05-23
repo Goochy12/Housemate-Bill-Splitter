@@ -33,6 +33,12 @@ export class DashboardComponent implements OnInit {
   owedTotal: Number = null;
   owingTotal: Number = null;
 
+  loadingOwedSummary: boolean = true;
+  loadingOwingSummary: boolean = true;
+  loadingOwed: boolean = true;
+  loadingOwing: boolean = true;
+  loadingAll: boolean = true;
+
   constructor(private route: ActivatedRoute, private retrievalService: RetrievalService,
     private router: Router, public dialog: MatDialog) { }
 
@@ -50,22 +56,27 @@ export class DashboardComponent implements OnInit {
 
   getAllData() {
     this.retrievalService.getOwedDetailed(this.user.id).subscribe(res => {
+      this.loadingOwed = false;
       this.owedDetailed = res;
       this.newOwedDetailed = res;
       this.filterRows();
     });
     this.retrievalService.getOwingDetailed(this.user.id).subscribe(res => {
+      this.loadingOwing = false;
       this.owingDetailed = res;
       this.newOwingDetailed = res;
       this.filterRows();
     });
     this.retrievalService.getOwedSummary(this.user.id).subscribe(res => {
+      this.loadingOwedSummary = false;
       this.owedSummary = res[0]["Amount"];
     });
     this.retrievalService.getOwingSummary(this.user.id).subscribe(res => {
+      this.loadingOwingSummary = false;
       this.owingSummary = res[0]["Amount"];
     });
     this.retrievalService.getAllUnpaidRecords().subscribe(res => {
+      this.loadingAll = false;
       this.allUnpaidRecords = res;
     });
     this.retrievalService.getUserList(this.user.groupID).subscribe(res => {

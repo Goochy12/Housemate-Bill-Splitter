@@ -12,7 +12,13 @@
 
             <div class="dashboard">
                 <h2>Summary</h2>
+                <div *ngIf="loadingOwingSummary">
+                    <mat-spinner></mat-spinner>
+                </div>
                 <p>You owe: <b>{{owingSummary | currency}}</b></p>
+                <div *ngIf="loadingOwedSummary">
+                    <mat-spinner></mat-spinner>
+                </div>
                 <p>You are owed: <b>{{owedSummary | currency}}</b></p>
             </div>
 
@@ -20,6 +26,9 @@
                 <button mat-raised-button color="primary" (click)="openDialog()">Add Item</button>
                 <mat-tab-group mat-align-tabs="center">
                     <mat-tab label="Who owes you?">
+                        <div *ngIf="loadingOwed">
+                            <mat-spinner></mat-spinner>
+                        </div>
                         <mat-form-field>
                             <mat-label>Filter</mat-label>
                             <mat-select [(value)]="owedFilterValue" (selectionChange)="filterRows()">
@@ -60,6 +69,9 @@
                     </mat-tab>
 
                     <mat-tab label="What do you owe?">
+                        <div *ngIf="loadingOwing">
+                            <mat-spinner></mat-spinner>
+                        </div>
                         <mat-form-field>
                             <mat-label>Filter</mat-label>
                             <mat-select [(value)]="owingFilterValue" (selectionChange)="filterRows()">
