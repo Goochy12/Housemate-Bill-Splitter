@@ -97,7 +97,6 @@ export class RetrievalService {
     });
   }
 
-
   getAllUnpaidRecords(groupID: Number) {
     return this.http.get(environment.backendURL + "/get_all_unpaid", { params: new HttpParams().set("groupID", String(groupID)) });
   }

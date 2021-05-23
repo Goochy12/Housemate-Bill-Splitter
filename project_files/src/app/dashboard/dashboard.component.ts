@@ -22,6 +22,7 @@ export class DashboardComponent implements OnInit {
   owedSummary: {};
   owingSummary: {};
   userList: {};
+  itemList: {};
   allUnpaidRecords: {};
   newAllUnpaidRecords: {};
   displayedColumnsOwed: string[] = ['from', 'item_name', 'amount', 'paid'];
@@ -96,6 +97,9 @@ export class DashboardComponent implements OnInit {
       }
     }
     )
+    this.retrievalService.getItemList().subscribe(res => {
+      this.itemList = res;
+    });
   }
 
   logoff() {
@@ -104,7 +108,7 @@ export class DashboardComponent implements OnInit {
   }
 
   openDialog() {
-    const dialogRef = this.dialog.open(NewRecordDialogComponent, { data: { "userList": this.userList, "user": this.user } });
+    const dialogRef = this.dialog.open(NewRecordDialogComponent, { data: { "userList": this.userList, "user": this.user, "itemList": this.itemList } });
 
     dialogRef.afterClosed().subscribe(res => {
       if (res) {
