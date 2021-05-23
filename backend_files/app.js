@@ -110,8 +110,9 @@ app.get('/get_owing_detailed', (req, res) => {
     connection = openDBConnection();
 
     var userID = req.query["userID"];
+    var groupID = req.query["groupID"];
 
-    var sql = `SELECT * FROM owing_detailed WHERE from_id = \"${userID}\";`;
+    var sql = `SELECT * FROM owing_detailed WHERE from_id = ` + mysql.escape(userID) + ` AND group_id = ` + mysql.escape(groupID) + `;`;
 
     connection.query(sql, (err, result) => {
         if (err) {
@@ -131,8 +132,9 @@ app.get('/get_owed_detailed', (req, res) => {
     connection = openDBConnection();
 
     var userID = req.query["userID"];
+    var groupID = req.query["groupID"];
 
-    var sql = `SELECT * FROM owed_detailed WHERE to_id = \"${userID}\";`;
+    var sql = `SELECT * FROM owed_detailed WHERE to_id = ` + mysql.escape(userID) + ` AND group_id = ` + mysql.escape(groupID) + `;`;
 
     connection.query(sql, (err, result) => {
         if (err) {
@@ -152,8 +154,9 @@ app.get('/get_owing_summary', (req, res) => {
     connection = openDBConnection();
 
     var userID = req.query["userID"];
+    var groupID = req.query["groupID"];
 
-    var sql = `SELECT * FROM owing_summary WHERE from_id = \"${userID}\";`;
+    var sql = `SELECT * FROM owing_summary WHERE from_id =` + mysql.escape(userID) + ` AND group_id=` + mysql.escape(groupID) + `;`;
 
     connection.query(sql, (err, result) => {
         if (err) {
@@ -173,8 +176,9 @@ app.get('/get_owed_summary', (req, res) => {
     connection = openDBConnection();
 
     var userID = req.query["userID"];
+    var groupID = req.query["groupID"];
 
-    var sql = `SELECT * FROM owed_summary WHERE to_id = \"${userID}\";`;
+    var sql = `SELECT * FROM owed_summary WHERE to_id = ` + mysql.escape(userID) + ` AND group_id=` + mysql.escape(groupID) + `;`;
 
     connection.query(sql, (err, result) => {
         if (err) {
@@ -192,8 +196,9 @@ app.get('/get_owed_summary', (req, res) => {
 
 app.get('/get_all_unpaid', (req, res) => {
     connection = openDBConnection();
+    var groupID = req.query["groupID"];
 
-    var sql = `SELECT * FROM all_unpaid_records;`;
+    var sql = `SELECT * FROM all_unpaid_records WHERE group_id=` + mysql.escape(groupID) + `;`;
 
     connection.query(sql, (err, result) => {
         if (err) {
@@ -216,11 +221,12 @@ app.get('/submit_record', (req, res) => {
     var userID = req.query["userID"];
     var owedID = req.query["owedID"];
     var owingID = req.query["owingID"];
+    var groupID = req.query["groupID"];
     var item = req.query["item"];
     var amount = req.query["amount"];
 
-    var sql = `INSERT INTO record (item, value, submitted_by_id, owed_id, owing_id, date_submitted)
-    values (` + mysql.escape(item) + `, ` + mysql.escape(amount) + `, ` + mysql.escape(userID) + `, ` + mysql.escape(owedID) + `,
+    var sql = `INSERT INTO record (group_id, item, value, submitted_by_id, owed_id, owing_id, date_submitted)
+    values (` + mysql.escape(groupID) + `, ` + mysql.escape(item) + `, ` + mysql.escape(amount) + `, ` + mysql.escape(userID) + `, ` + mysql.escape(owedID) + `,
     ` + mysql.escape(owingID) + `, current_timestamp());`;
 
     connection.query(sql, (err, result) => {
@@ -239,8 +245,10 @@ app.get('/update_record_paid', (req, res) => {
     connection = openDBConnection();
 
     var recordID = req.query["recordID"];
+    var groupID = req.query["groupID"];
 
-    var sql = `UPDATE record SET paid = 1, date_paid = current_timestamp() WHERE ID =` + mysql.escape(recordID) + `;`;
+    var sql = `UPDATE record SET paid = 1, date_paid = current_timestamp() WHERE ID =` + mysql.escape(recordID) +
+        ` AND group_id=` + mysql.escape(groupID) + `;`;
 
     connection.query(sql, (err, result) => {
         if (err) {
@@ -255,6 +263,8 @@ app.get('/update_record_paid', (req, res) => {
     });
     connection.end(); //close the connection
 });
+
+
 
 app.listen(process.env.PORT | 3000, () => {
 });
