@@ -23,6 +23,8 @@ export class NewRecordDialogComponent implements OnInit {
   owedID: Number = null;
   owedDisplayName: string = null;
 
+  enabled: boolean = true;
+
   myControl = new FormControl();
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: {}, private retrievalService: RetrievalService, private dialogRef: MatDialogRef<NewRecordDialogComponent>) { }
@@ -47,7 +49,7 @@ export class NewRecordDialogComponent implements OnInit {
   }
 
   submit() {
-    // console.log(this.owedID);
+    this.enabled = false;
     this.retrievalService.submitNewRecord(
       this.user.id
       , this.user.groupID
@@ -57,6 +59,8 @@ export class NewRecordDialogComponent implements OnInit {
       , Number(this.amountValue)).subscribe(res => {
         if (res) {
           this.dialogRef.close({ "refresh": true });
+        } else {
+          this.enabled = true;
         }
       });
   }
